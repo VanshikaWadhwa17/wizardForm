@@ -1,0 +1,21 @@
+.button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .primary {
+    background-color: #2563eb; /* Blue */
+  }
+  
+  .secondary {
+    background-color: #6b7280; /* Gray */
+  }
+  
+  .danger {
+    background-color: #dc2626; /* Red */
+  }
+  

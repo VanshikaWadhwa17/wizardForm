@@ -1,0 +1,68 @@
+.progressBarContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 24px;
+  }
+  
+  .progressBar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  
+  .stepContainer {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  /* Step Circle */
+  .stepCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db;
+    font-size: 14px;
+    font-weight: bold;
+    color: #9ca3af;
+    background-color: white;
+  }
+  
+  .activeStep {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+  }
+  
+  /* Step Label */
+  .stepLabel {
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #9ca3af;
+  }
+  
+  .activeLabel {
+    color: #2563eb;
+  }
+  
+  /* Connector Line */
+  .connector {
+    flex: 1;
+    height: 4px;
+    margin: 0 8px;
+    background-color: #d1d5db;
+  }
+  
+  .activeConnector {
+    background-color: #3b82f6;
+  }
+  

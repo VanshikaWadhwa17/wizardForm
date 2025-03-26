@@ -1,0 +1,166 @@
+  .formContainer {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .section {
+    width: 48%;
+    min-width: 300px; 
+  }
+  
+  .formContainer h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .formContainer p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  
+  .formContainer label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  
+  .formContainer input,
+  .formContainer select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    display: block;
+    box-sizing: border-box;
+  }
+  
+  .uploadContainer {
+    margin-bottom: 20px;
+  }
+  
+  .dropzone {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background: #f9f9f9;
+  }
+  
+  .uploadText p {
+    margin: 5px 0;
+  }
+  
+  .fileTypes {
+    color: #888;
+    font-size: 12px;
+  }
+  
+  .uploadIcon {
+    width: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .logoPreview {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    margin: auto;
+    border-radius: 4px;
+  }
+  
+  .buttonContainer {
+    width: 100%;
+    text-align: center; /* Centers the button */
+    margin-top: 20px;
+  }
+  
+  .submitButton {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .submitButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .submitButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .tooltip-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: black;
+    font-weight: 500; /* Medium */
+    font-size: 0.875rem; /* text-sm */
+    padding: 0.5rem;
+    border-radius: 0.375rem; /* rounded-md */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    border: 1px solid #E5E7EB; /* border-gray-200 */
+    width: 16rem; /* w-64 */
+    z-index: 10;
+    white-space: normal;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .tooltip-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  /* Button Styles */
+.continueButton {
+  background-color: #3b82f6; /* Tailwind bg-blue-500 */
+  color: white;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.continueButton:hover {
+  background-color: #1d4ed8; /* Tailwind hover:bg-blue-700 */
+}
+/* Error Message Styles */
+.errorMessage {
+  color: #dc2626; /* Tailwind text-red-600 */
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 4px;
+}

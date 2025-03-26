@@ -1,0 +1,134 @@
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .pricingBox {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .subheading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .unitInfo {
+    color: gray;
+    font-size: 14px;
+  }
+  
+  .totalAmount {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1d4ed8;
+    margin-bottom: 15px;
+  }
+  
+  .includesHeading {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .includedList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .includedList li {
+    margin-bottom: 5px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .includedList li::before {
+    content: "✔";
+    color: #1d4ed8;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+  
+  .discountSection {
+    background: #eef6ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .discountHeading {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .discountDescription {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .discountOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .checkbox {
+    margin-right: 10px;
+  }
+  
+  .discountTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1d4ed8;
+  }
+  
+  .discountDetails {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .discountAmount {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d32f2f;
+  }
+  
+  .totalBox {
+    background: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .totalLabel {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .finalAmount {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1d4ed8;
+  }
+  

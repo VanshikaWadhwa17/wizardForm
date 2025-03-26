@@ -1,0 +1,87 @@
+.container {
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .startButton {
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .startButton:hover {
+    background-color: #1e40af;
+  }
+  
+  /* Search Filters */
+  .filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+  }
+  
+  .select {
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+  }
+  
+  .applyButton {
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .applyButton:hover {
+    background-color: #1e40af;
+  }
+  
+  /* Tabs */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .tab {
+    padding: 8px 16px;
+    color: #6b7280;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+  
+  .tab:hover {
+    color: #1e40af;
+  }
+  
+  .activeTab {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+  }
+  
