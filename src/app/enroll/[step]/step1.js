@@ -1,35 +1,37 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter , useParams} from "next/navigation";
 import { useDropzone } from "react-dropzone";
-import { useWizard } from "@/context/WizardContext";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFormData } from "@/store/wizardSlice";
 import styles from "@/styles/Step1.module.css";
 import { Info } from "lucide-react";
-import Button from "@/components/Button"; 
+import Button from "@/components/Button";
 
 export default function Step1() {
-  const { formData, setFormData } = useWizard();
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.wizard);
+  const params = useParams(); 
+  // const currentStep = Number(params.step) || 1; 
+  const [currentStep, setCurrentStep] = useState(Number(params?.step) || 1);
+
   const [isBillingSame, setIsBillingSame] = useState(formData.isBillingSame);
   const [noConsultant, setNoConsultant] = useState(formData.consultant === "");
-  const [logoPreview, setLogoPreview] = useState(
-    formData.organizationLogoUrl || null
-  );
+  const [logoPreview, setLogoPreview] = useState(formData.organizationLogoUrl || null);
   const [showTooltip, setShowTooltip] = useState(false);
   const [errors, setErrors] = useState({});
 
   const router = useRouter();
 
-
   // Handle file upload
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
     const fileUrl = URL.createObjectURL(file);
-    setFormData({
-      ...formData,
+    dispatch(updateFormData({
       organizationLogo: file,
       organizationLogoUrl: fileUrl,
-    });
+    }));
     setLogoPreview(fileUrl);
   };
 
@@ -52,24 +54,31 @@ export default function Step1() {
     if (!formData.orgPostalCode) newErrors.orgPostalCode = "Postal Code is required";
     if (!formData.billingName) newErrors.billingName = "Billing Name is required";
     if (!formData.billingOrganizationType) newErrors.billingOrganizationType = "Billing organization is required";
-    if (!formData.billingCountry) newErrors.billingCountry = "Billind Country/Region is required";
+    if (!formData.billingCountry) newErrors.billingCountry = "Billing Country/Region is required";
     if (!formData.billingStreet) newErrors.billingStreet = "Billing Street Address is required";
     if (!formData.billingCity) newErrors.billingCity = "Billing City is required";
     if (!formData.billingPostalCode) newErrors.billingPostalCode = "Billing Postal Code is required";
 
-
-
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Returns true if no errors
+    return Object.keys(newErrors).length === 0;
   };
+
+  // useEffect(() => {
+  //   console.log("Current Step:", currentStep);
+  // }, [currentStep]);
+  useEffect(() => {
+    console.log("Params updated:", params);
+    setCurrentStep(Number(params?.step) || 1);
+  }, [params]); 
 
   const handleContinue = () => {
     if (validateForm()) {
-      router.push("/enroll/2"); // Navigate to Step 2 if form is valid
+      router.push(`/enroll/${currentStep + 1}`);
     }
   };
 
-  // Sync local states with global formData
+
+  // Sync local states with Redux formData
   useEffect(() => {
     setIsBillingSame(formData.isBillingSame);
     setNoConsultant(formData.consultant === "");
@@ -90,7 +99,7 @@ export default function Step1() {
           type="text"
           value={formData.organization}
           onChange={(e) =>
-            setFormData({ ...formData, organization: e.target.value })
+            dispatch(updateFormData({ ...formData, organization: e.target.value }))
           }
         />
         {errors.organization && <p className={styles.errorMessage}>{errors.organization}</p>}
@@ -100,7 +109,7 @@ export default function Step1() {
           type="text"
           value={formData.ownerName}
           onChange={(e) =>
-            setFormData({ ...formData, ownerName: e.target.value })
+            dispatch(updateFormData({ ...formData, ownerName: e.target.value }))
           }
         />
         {errors.ownerName && <p className={styles.errorMessage}>{errors.ownerName}</p>}
@@ -109,7 +118,7 @@ export default function Step1() {
         <select
           value={formData.organizationType}
           onChange={(e) =>
-            setFormData({ ...formData, organizationType: e.target.value })
+            dispatch(updateFormData({ ...formData, organizationType: e.target.value }))
           }
         >
           <option value="">Select Organization</option>
@@ -122,7 +131,7 @@ export default function Step1() {
         <select
           value={formData.organizationIndustry}
           onChange={(e) =>
-            setFormData({ ...formData, organizationIndustry: e.target.value })
+            dispatch(updateFormData({ ...formData, organizationIndustry: e.target.value }))
           }
         >
           <option value="">Select Organization Industry</option>
@@ -135,7 +144,7 @@ export default function Step1() {
         <select
           value={formData.consultant}
           onChange={(e) =>
-            setFormData({ ...formData, consultant: e.target.value })
+            dispatch(updateFormData({ ...formData, consultant: e.target.value }))
           }
           disabled={noConsultant}
         >
@@ -157,7 +166,10 @@ export default function Step1() {
             checked={noConsultant}
             onChange={() => {
               setNoConsultant(!noConsultant);
-              if (!noConsultant) setFormData({ ...formData, consultant: "" });
+              
+              if (!noConsultant) {
+                dispatch(updateFormData({ consultant: "" })); 
+              }
             }}
           />
           No consultant supported this project
@@ -168,7 +180,7 @@ export default function Step1() {
         <select
           value={formData.ownerCountry}
           onChange={(e) =>
-            setFormData({ ...formData, ownerCountry: e.target.value })
+            dispatch(updateFormData({ ...formData, ownerCountry: e.target.value }))
           }
         >
           <option value="">Select Country</option>
@@ -197,7 +209,7 @@ export default function Step1() {
           type="text"
           value={formData.orgStreetAddress}
           onChange={(e) =>
-            setFormData({ ...formData, orgStreetAddress: e.target.value })
+            dispatch(updateFormData({ ...formData, orgStreetAddress: e.target.value }))
           }
         />
         {errors.orgStreetAddress && <p className={styles.errorMessage}>{errors.orgStreetAddress}</p>}
@@ -207,7 +219,7 @@ export default function Step1() {
           type="text"
           value={formData.orgCity}
           onChange={(e) =>
-            setFormData({ ...formData, orgCity: e.target.value })
+            dispatch(updateFormData({ ...formData, orgCity: e.target.value }))
           }
         />
         {errors.orgCity && <p className={styles.errorMessage}>{errors.orgCity}</p>}
@@ -217,7 +229,7 @@ export default function Step1() {
           type="text"
           value={formData.orgPostalCode}
           onChange={(e) =>
-            setFormData({ ...formData, orgPostalCode: e.target.value })
+            dispatch(updateFormData({ ...formData, orgPostalCode: e.target.value }))
           }
         />
         {errors.orgPostalCode && <p className={styles.errorMessage}>{errors.orgPostalCode}</p>}
@@ -263,7 +275,7 @@ export default function Step1() {
         <select
           value={formData.sectorDiscount}
           onChange={(e) =>
-            setFormData({ ...formData, sectorDiscount: e.target.value })
+            dispatch(updateFormData({ ...formData, sectorDiscount: e.target.value }))
           }
         >
           <option value="">Not Applicable</option>
@@ -286,8 +298,8 @@ export default function Step1() {
             checked={isBillingSame}
             onChange={() => {
               setIsBillingSame(!isBillingSame);
-              setFormData({ ...formData, isBillingSame: !isBillingSame });
-            }}
+              dispatch(updateFormData({ isBillingSame: !isBillingSame })); 
+            }}            
           />
           Billing address is same as owner address
         </label>
@@ -300,7 +312,7 @@ export default function Step1() {
               type="text"
               value={formData.billingName}
               onChange={(e) =>
-                setFormData({ ...formData, billingName: e.target.value })
+                dispatch(updateFormData({ ...formData, billingName: e.target.value }))
               }
             />
              {errors.billingName && <p className={styles.errorMessage}>{errors.billingName}</p>}
@@ -309,10 +321,10 @@ export default function Step1() {
             <select
               value={formData.billingOrganizationType}
               onChange={(e) =>
-                setFormData({
+                dispatch(updateFormData({
                   ...formData,
                   billingOrganizationType: e.target.value,
-                })
+                }))
               }
             >
               <option value="">Select Organization</option>
@@ -325,7 +337,7 @@ export default function Step1() {
             <select
               value={formData.billingCountry}
               onChange={(e) =>
-                setFormData({ ...formData, billingCountry: e.target.value })
+                dispatch(updateFormData({ ...formData, billingCountry: e.target.value }))
               }
             >
               <option value="">Select Country</option>
@@ -339,7 +351,7 @@ export default function Step1() {
               type="text"
               value={formData.billingStreet}
               onChange={(e) =>
-                setFormData({ ...formData, billingStreet: e.target.value })
+                dispatch(updateFormData({ ...formData, billingStreet: e.target.value }))
               }
             />
             {errors.billingStreet && <p className={styles.errorMessage}>{errors.billingStreet}</p>}
@@ -349,7 +361,7 @@ export default function Step1() {
               type="text"
               value={formData.billingCity}
               onChange={(e) =>
-                setFormData({ ...formData, billingCity: e.target.value })
+                dispatch(updateFormData({ ...formData, billingCity: e.target.value }))
               }
             />
             {errors.billingCity && <p className={styles.errorMessage}>{errors.billingCity}</p>}
@@ -359,7 +371,7 @@ export default function Step1() {
               type="text"
               value={formData.billingPostalCode}
               onChange={(e) =>
-                setFormData({ ...formData, billingPostalCode: e.target.value })
+                dispatch(updateFormData({ ...formData, billingPostalCode: e.target.value }))
               }
             />
             {errors.billingPostalCode && <p className={styles.errorMessage}>{errors.billingPostalCode}</p>}

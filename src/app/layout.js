@@ -1,4 +1,5 @@
 import "./globals.css";
+import Providers from "../store/Providers"; // Import Redux Provider component
 
 export const metadata = {
   title: "My App",
@@ -8,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers> {/* Wrap children with Providers */}
+      </body>
     </html>
   );
 }
